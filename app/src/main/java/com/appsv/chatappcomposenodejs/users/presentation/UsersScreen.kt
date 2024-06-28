@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.appsv.chatappcomposenodejs.navigation.Routes
 import com.appsv.chatappcomposenodejs.users.data.models.User
 import com.appsv.chatappcomposenodejs.users.domain.models.listOfConversations
 import com.appsv.chatappcomposenodejs.users.presentation.components.ConversationItem
@@ -43,7 +44,7 @@ fun UsersScreen(
                 ConversationItem(
                     user = conversation,
                     onClick = {
-
+                        navController.navigate(Routes.ChatScreen.route)
                     }
                 )
             }

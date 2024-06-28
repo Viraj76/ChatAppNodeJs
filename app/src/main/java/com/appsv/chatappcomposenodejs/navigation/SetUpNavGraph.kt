@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.appsv.chatappcomposenodejs.add_users.presentation.AddUsersScreen
+import com.appsv.chatappcomposenodejs.chat.presentation.ChatScreen
 import com.appsv.chatappcomposenodejs.users.presentation.UserViewModel
 import com.appsv.chatappcomposenodejs.users.presentation.UsersScreen
 
@@ -45,6 +46,10 @@ fun SetUpNavGraph(
             }
             val viewModel =  viewModel<UserViewModel>()
             UsersScreen(navController = navController,  userViewModel = viewModel)
+        }
+        
+        composable(route = Routes.ChatScreen.route){
+            ChatScreen(navController = navController)
         }
 
     }

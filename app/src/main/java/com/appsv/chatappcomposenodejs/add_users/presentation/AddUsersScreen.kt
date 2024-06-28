@@ -65,6 +65,14 @@ fun AddUsersScreen(
             Text(text = "Go to users")
         }
 
+        Button(onClick ={
+            Log.d("userName" , textState.value)
+//            scope.launch { saveUser(apiService,User(username = textState.value),navController,textState.value) }
+            navController.navigate(Routes.UsersScreen.passUserName("Viraj"))
+        } ) {
+            Text(text = "Just Go")
+        }
+
     }
 }
 

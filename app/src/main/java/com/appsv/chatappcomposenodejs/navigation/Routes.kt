@@ -13,4 +13,5 @@ sealed class Routes(
         }
     }
 
+    data object ChatScreen : Routes(route = "chat_screens")
 }
