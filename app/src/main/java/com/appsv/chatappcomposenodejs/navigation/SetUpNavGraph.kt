@@ -66,6 +66,7 @@ fun SetUpNavGraph(
             LaunchedEffect(key1 = Unit) {
                 Log.d("idssss" , "$first$second")
                 viewModel.getMessages("$first$second")
+                viewModel.joinRoom("$first$second")
             }
             ChatScreen(navController = navController,senderId!!,receiverId!!,viewModel)
         }

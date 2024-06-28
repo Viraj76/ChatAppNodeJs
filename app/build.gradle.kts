@@ -94,4 +94,7 @@ dependencies {
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("org.mongodb:mongodb-driver-sync:4.5.0")
     implementation("org.mongodb:bson:4.5.0")
+
+    // socket.io
+    implementation("io.socket:socket.io-client:2.0.0")
 }

@@ -2,6 +2,7 @@ package com.appsv.chatappcomposenodejs.chat.presentation
 
 
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -43,11 +44,14 @@ fun ChatScreen(
     val topBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topBarState)
     val messages = viewModel.messages.value.reversed()
+//    val liveMessages = viewModel.liveMessages
 
-//    LaunchedEffect(key1 = messages.value) {
+
+//
+//    LaunchedEffect(key1 = messages) {
 ////        viewModel.getMessages(chatRoomId)
 ////        val mes = messages.value
-//        for (i in messages.value){
+//        for (i in messages){
 //            Log.d("messages" , i.toString())
 //        }
 //    }
