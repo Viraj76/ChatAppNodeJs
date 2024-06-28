@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.appsv.chatappcomposenodejs.add_users.presentation.AddUsersScreen
+import com.appsv.chatappcomposenodejs.chat.presentation.ChatRoomViewModel
 import com.appsv.chatappcomposenodejs.chat.presentation.ChatScreen
 import com.appsv.chatappcomposenodejs.users.presentation.UserViewModel
 import com.appsv.chatappcomposenodejs.users.presentation.UsersScreen
@@ -48,8 +49,17 @@ fun SetUpNavGraph(
             UsersScreen(navController = navController,  userViewModel = viewModel)
         }
         
-        composable(route = Routes.ChatScreen.route){
-            ChatScreen(navController = navController)
+        composable(
+            route = Routes.ChatScreen.route,
+            arguments = listOf(
+                navArgument(SENDER_KEY){type = NavType.StringType},
+                navArgument(RECEIVER_KEY){type = NavType.StringType}
+            )
+        ){
+            val senderId  = it.arguments?.getString(SENDER_KEY)
+            val receiverId  = it.arguments?.getString(RECEIVER_KEY)
+            val viewModel = viewModel<ChatRoomViewModel>()
+            ChatScreen(navController = navController,senderId!!,receiverId!!,viewModel)
         }
 
     }

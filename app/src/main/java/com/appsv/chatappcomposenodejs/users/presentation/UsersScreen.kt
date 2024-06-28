@@ -28,6 +28,8 @@ fun UsersScreen(
 ) {
 
     val users: MutableState<List<User>> = userViewModel.users
+
+    val senderId = "667e208a601cebf18f4bfe40"
     Scaffold(
         topBar = {
             HomeAppBar()
@@ -44,7 +46,7 @@ fun UsersScreen(
                 ConversationItem(
                     user = conversation,
                     onClick = {
-                        navController.navigate(Routes.ChatScreen.route)
+                        navController.navigate(Routes.ChatScreen.passKeys(senderId,conversation._id!!))
                     }
                 )
             }

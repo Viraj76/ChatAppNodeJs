@@ -2,6 +2,7 @@ package com.appsv.chatappcomposenodejs.chat.presentation
 
 
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.exclude
@@ -19,6 +20,7 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -27,14 +29,39 @@ import androidx.navigation.NavController
 import com.appsv.chatappcomposenodejs.chat.components.ChatAppBar
 import com.appsv.chatappcomposenodejs.chat.components.MessageBox
 import com.appsv.chatappcomposenodejs.chat.components.MessageInputField
-import com.appsv.chatappcomposenodejs.chat.domain.models.listOfMessages
+import org.bson.types.ObjectId
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatScreen(navController: NavController) {
+fun ChatScreen(
+    navController: NavController,
+    senderId : String,
+    receiverId : String,
+    viewModel: ChatRoomViewModel
+) {
     val topBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topBarState)
+
+    val senderObjectId: ObjectId = ObjectId(senderId)
+    val receiverObjectId: ObjectId = ObjectId(receiverId)
+
+    val chatRoomId = "$senderObjectId$receiverObjectId"
+    val messages = viewModel.messages
+
+    LaunchedEffect(key1 = Unit) {
+        viewModel.getMessages(chatRoomId)
+        val mes = messages.value
+        for (i in messages.value){
+            Log.d("messages" , i.toString())
+        }
+    }
+
+
+
+//    LaunchedEffect(key1 = Unit) {
+//        Log.d("iddsss" , "$senderObjectId  $receiverObjectId")
+//    }
 
     Scaffold(
         modifier = Modifier
@@ -55,18 +82,30 @@ fun ChatScreen(navController: NavController) {
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
         ) {
+
+
+
+
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
                 reverseLayout = true,
             ) {
-                items(listOfMessages) { message ->
-                    MessageBox(message = message)
-                }
+//                items(listOfMessages) { message ->
+//                    MessageBox(message = message)
+//                }
             }
 
-            MessageInputField(navController = navController)
+            MessageInputField(
+                navController = navController
+            ){
+                viewModel.sendMessage(senderId,receiverId,it)
+            }
+
+
+
         }
     }
 }

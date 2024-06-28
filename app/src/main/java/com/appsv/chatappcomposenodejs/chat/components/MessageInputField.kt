@@ -38,7 +38,10 @@ import com.appsv.chatappcomposenodejs.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MessageInputField(navController: NavController) {
+fun MessageInputField(
+    navController: NavController,
+    onSend :(String) -> Unit
+) {
     val message = remember { mutableStateOf("") }
 
     val containerColor = Color(0xFF2B2B2B)
@@ -82,7 +85,7 @@ fun MessageInputField(navController: NavController) {
         },
         trailingIcon = {
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = { onSend(message.value)},
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = Color(0xFFCCCCCC)
                 )

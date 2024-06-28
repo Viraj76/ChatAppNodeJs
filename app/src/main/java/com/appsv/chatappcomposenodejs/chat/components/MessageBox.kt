@@ -32,7 +32,7 @@ import com.appsv.chatappcomposenodejs.chat.domain.models.Message
 
 @Composable
 fun MessageBox(message: Message) {
-    val modifier = if (message.isMe) {
+    val modifier = if (true) {
         Modifier
             .padding(start = 16.dp, end = 8.dp)
             .defaultMinSize(minHeight = 60.dp)
@@ -60,13 +60,13 @@ fun MessageBox(message: Message) {
             )
     }
 
-    val boxArrangement = if (message.isMe) Alignment.CenterEnd else Alignment.CenterStart
+    val boxArrangement = if (true) Alignment.CenterEnd else Alignment.CenterStart
 
     Box(modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(), contentAlignment = boxArrangement) {
         Row(
             verticalAlignment = Alignment.Bottom,
         ) {
-            if (!message.isMe)
+            if (!true)
                 Box(
                     modifier = Modifier
                         .size(40.dp)
@@ -97,14 +97,14 @@ fun MessageBox(message: Message) {
                         )
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = message.time,
-                        style = TextStyle(
-                            color = Color.White,
-                            fontSize = 12.sp,
-                            fontFamily = FontFamily(Font(R.font.sen)),
-                        )
-                    )
+//                    Text(
+//                        text = message.time,
+//                        style = TextStyle(
+//                            color = Color.White,
+//                            fontSize = 12.sp,
+//                            fontFamily = FontFamily(Font(R.font.sen)),
+//                        )
+//                    )
                 }
             }
         }
