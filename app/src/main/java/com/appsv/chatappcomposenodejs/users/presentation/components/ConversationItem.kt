@@ -35,12 +35,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.appsv.chatappcomposenodejs.R
+import com.appsv.chatappcomposenodejs.users.data.models.User
 import com.appsv.chatappcomposenodejs.users.domain.models.Conversation
 import kotlin.random.Random
 
 
 @Composable
-fun ConversationItem(conversation: Conversation, onClick: () -> Unit) {
+fun ConversationItem(
+    user : User,
+    onClick: () -> Unit
+) {
     Row(
         modifier = Modifier
             .padding(vertical = 22.dp)
@@ -56,7 +60,7 @@ fun ConversationItem(conversation: Conversation, onClick: () -> Unit) {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = conversation.sender.first().toString(),
+                text = user.username?.first().toString(),
                 color = Color.White,
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold
@@ -76,7 +80,7 @@ fun ConversationItem(conversation: Conversation, onClick: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = conversation.sender,
+                    text = user.username!!,
                     maxLines = 1,
                     modifier = Modifier.weight(1f),
                     overflow = TextOverflow.Ellipsis,
@@ -90,7 +94,7 @@ fun ConversationItem(conversation: Conversation, onClick: () -> Unit) {
                 Spacer(modifier = Modifier.width(10.dp))
 
                 Text(
-                    text = conversation.time,
+                    text = "Mon",
                     style = TextStyle(
                         color = Color.White,
                         fontSize = 16.sp,
@@ -104,10 +108,7 @@ fun ConversationItem(conversation: Conversation, onClick: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = buildAnnotatedString {
-                        append(if (conversation.amILastSender) "You: " else "")
-                        append(conversation.message)
-                    },
+                    text = "Just a message",
                     modifier = Modifier.weight(1f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -120,8 +121,8 @@ fun ConversationItem(conversation: Conversation, onClick: () -> Unit) {
 
                 Spacer(modifier = Modifier.width(10.dp))
 
-                if (conversation.unread)
-                    ReadIndicator()
+//                if (conversation.unread)
+//                    ReadIndicator()
             }
         }
     }

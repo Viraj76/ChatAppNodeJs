@@ -13,6 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import com.appsv.chatappcomposenodejs.add_users.presentation.AddUsersScreen
+import com.appsv.chatappcomposenodejs.navigation.Routes
+import com.appsv.chatappcomposenodejs.navigation.SetUpNavGraph
 import com.appsv.chatappcomposenodejs.ui.theme.ChatAppComposeNodeJsTheme
 import com.appsv.chatappcomposenodejs.users.presentation.UsersScreen
 
@@ -25,9 +28,9 @@ class MainActivity : ComponentActivity() {
             ChatAppComposeNodeJsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
-                    UsersScreen(
+
+                    SetUpNavGraph(
                         modifier = Modifier.padding(innerPadding) ,
-                        navController = navController
                     )
                 }
             }

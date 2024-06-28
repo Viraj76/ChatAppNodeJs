@@ -88,6 +88,7 @@ dependencies {
     //retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
     // Koin core features
     implementation("io.insert-koin:koin-android:3.2.0")
