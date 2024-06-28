@@ -42,20 +42,15 @@ fun ChatScreen(
 ) {
     val topBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topBarState)
+    val messages = viewModel.messages.value.reversed()
 
-    val senderObjectId: ObjectId = ObjectId(senderId)
-    val receiverObjectId: ObjectId = ObjectId(receiverId)
-
-    val chatRoomId = "$senderObjectId$receiverObjectId"
-    val messages = viewModel.messages
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.getMessages(chatRoomId)
-        val mes = messages.value
-        for (i in messages.value){
-            Log.d("messages" , i.toString())
-        }
-    }
+//    LaunchedEffect(key1 = messages.value) {
+////        viewModel.getMessages(chatRoomId)
+////        val mes = messages.value
+//        for (i in messages.value){
+//            Log.d("messages" , i.toString())
+//        }
+//    }
 
 
 
@@ -83,19 +78,18 @@ fun ChatScreen(
                 .fillMaxSize()
         ) {
 
-
-
-
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
                 reverseLayout = true,
             ) {
-//                items(listOfMessages) { message ->
-//                    MessageBox(message = message)
-//                }
+                items(messages) { message ->
+                    MessageBox(
+                        message = message,
+                        senderId = senderId
+                    )
+                }
             }
 
             MessageInputField(

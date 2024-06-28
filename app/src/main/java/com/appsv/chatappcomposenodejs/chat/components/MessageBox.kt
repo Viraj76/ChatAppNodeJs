@@ -28,11 +28,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.appsv.chatappcomposenodejs.R
+import com.appsv.chatappcomposenodejs.chat.data.models.ChatMessages
 import com.appsv.chatappcomposenodejs.chat.domain.models.Message
 
 @Composable
-fun MessageBox(message: Message) {
-    val modifier = if (true) {
+fun MessageBox(
+    message: ChatMessages,
+    senderId : String
+) {
+    val modifier = if (senderId == message.sender) {
         Modifier
             .padding(start = 16.dp, end = 8.dp)
             .defaultMinSize(minHeight = 60.dp)
@@ -60,13 +64,13 @@ fun MessageBox(message: Message) {
             )
     }
 
-    val boxArrangement = if (true) Alignment.CenterEnd else Alignment.CenterStart
+    val boxArrangement = if (senderId == message.sender) Alignment.CenterEnd else Alignment.CenterStart
 
     Box(modifier = Modifier.padding(vertical = 12.dp).fillMaxWidth(), contentAlignment = boxArrangement) {
         Row(
             verticalAlignment = Alignment.Bottom,
         ) {
-            if (!true)
+            if (senderId != message.sender)
                 Box(
                     modifier = Modifier
                         .size(40.dp)

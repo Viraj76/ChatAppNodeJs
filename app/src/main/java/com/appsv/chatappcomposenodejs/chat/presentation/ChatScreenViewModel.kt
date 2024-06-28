@@ -22,10 +22,6 @@ class ChatRoomViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val fetchedMessage = chatRoomService.getMessages(chatRoomId)
-                Log.d("messages" , chatRoomId.toString())
-                for(i in fetchedMessage.messages){
-                    Log.d("messages" , i.toString())
-                }
                 messages.value = fetchedMessage.messages
             } catch (e: Exception) {
                 // Handle error

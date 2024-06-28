@@ -59,6 +59,14 @@ fun SetUpNavGraph(
             val senderId  = it.arguments?.getString(SENDER_KEY)
             val receiverId  = it.arguments?.getString(RECEIVER_KEY)
             val viewModel = viewModel<ChatRoomViewModel>()
+            val chatRoomList = listOf(senderId,receiverId).sortedBy { it }
+            val first = chatRoomList[0]
+            val second = chatRoomList[1]
+
+            LaunchedEffect(key1 = Unit) {
+                Log.d("idssss" , "$first$second")
+                viewModel.getMessages("$first$second")
+            }
             ChatScreen(navController = navController,senderId!!,receiverId!!,viewModel)
         }
 

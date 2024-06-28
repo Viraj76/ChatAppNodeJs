@@ -85,7 +85,10 @@ fun MessageInputField(
         },
         trailingIcon = {
             IconButton(
-                onClick = { onSend(message.value)},
+                onClick = {
+                    onSend(message.value)
+                    message.value = ""
+                          },
                 colors = IconButtonDefaults.iconButtonColors(
                     contentColor = Color(0xFFCCCCCC)
                 )
