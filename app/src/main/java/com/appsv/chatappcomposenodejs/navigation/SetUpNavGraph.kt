@@ -56,6 +56,7 @@ fun SetUpNavGraph(
                 navArgument(RECEIVER_KEY){type = NavType.StringType}
             )
         ){
+
             val senderId  = it.arguments?.getString(SENDER_KEY)
             val receiverId  = it.arguments?.getString(RECEIVER_KEY)
             val viewModel = viewModel<ChatRoomViewModel>()

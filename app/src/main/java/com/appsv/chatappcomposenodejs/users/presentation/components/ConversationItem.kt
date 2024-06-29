@@ -94,7 +94,7 @@ fun ConversationItem(
                 Spacer(modifier = Modifier.width(10.dp))
 
                 Text(
-                    text = "Mon",
+                    text = user.lastTime,
                     style = TextStyle(
                         color = Color.White,
                         fontSize = 16.sp,
@@ -108,7 +108,7 @@ fun ConversationItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Just a message",
+                    text = user.lastMessage!!,
                     modifier = Modifier.weight(1f),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

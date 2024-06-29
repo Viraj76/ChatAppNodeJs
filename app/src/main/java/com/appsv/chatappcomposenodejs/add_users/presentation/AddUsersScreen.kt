@@ -60,13 +60,14 @@ fun AddUsersScreen(
         Button(onClick ={
             Log.d("userName" , textState.value)
             scope.launch { saveUser(apiService,User(username = textState.value),navController,textState.value) }
+
 //            navController.navigate(Routes.UsersScreen.passUserName(textState.value))
         } ) {
             Text(text = "Go to users")
         }
 
         Button(onClick ={
-            Log.d("userName" , textState.value)
+
 //            scope.launch { saveUser(apiService,User(username = textState.value),navController,textState.value) }
             navController.navigate(Routes.UsersScreen.passUserName("Viraj"))
         } ) {
@@ -77,6 +78,7 @@ fun AddUsersScreen(
 }
 
 fun saveUser(apiService: ApiService, user: User, navController: NavController, value: String) {
+    Log.d("userName" , user.toString())
     apiService.saveUser(user).enqueue(object : Callback<User> {
         override fun onResponse(call: Call<User>, response: Response<User>) {
             val code = response.code()

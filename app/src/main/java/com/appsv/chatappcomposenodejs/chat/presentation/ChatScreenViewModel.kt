@@ -44,9 +44,13 @@ class ChatRoomViewModel : ViewModel() {
             socket.on("newMessage"){ args->
                 args?.let { d ->
                     if (d.isNotEmpty()) {
-                        val data = d[0] as JSONObject            // was giving one error
+                        val data = d[0] as JSONObject
+
                         val message = data.getJSONObject("message").toMessage()
+//                        val chat = data.getJSONObject("chatRoomId").toMessage()
                         Log.d("DATADEBUG","$message")
+                        Log.d("DATADEBUG","$data")
+//                        Log.d("DATADEBUG","$chat")
                         if (data.toString().isNotEmpty()) {
                             val currentMessages = messages.value.toMutableList()
                             currentMessages.add(message)
@@ -102,6 +106,7 @@ class ChatRoomViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+        Log.d("cleared" , "clear io")
         socket.disconnect()
     }
 

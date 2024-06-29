@@ -3,7 +3,9 @@ package com.appsv.chatappcomposenodejs.chat.presentation
 
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.exclude
@@ -33,6 +35,7 @@ import com.appsv.chatappcomposenodejs.chat.components.MessageInputField
 import org.bson.types.ObjectId
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(

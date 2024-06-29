@@ -1,5 +1,8 @@
 package com.appsv.chatappcomposenodejs.chat.components
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -30,7 +33,13 @@ import androidx.compose.ui.unit.sp
 import com.appsv.chatappcomposenodejs.R
 import com.appsv.chatappcomposenodejs.chat.data.models.ChatMessages
 import com.appsv.chatappcomposenodejs.chat.domain.models.Message
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MessageBox(
     message: ChatMessages,
@@ -101,16 +110,32 @@ fun MessageBox(
                         )
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-//                    Text(
-//                        text = message.time,
-//                        style = TextStyle(
-//                            color = Color.White,
-//                            fontSize = 12.sp,
-//                            fontFamily = FontFamily(Font(R.font.sen)),
-//                        )
-//                    )
+                    val time = formatTimestampToHHMM(message.timestamp)
+                    Text(
+                        text = time,
+                        style = TextStyle(
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            fontFamily = FontFamily(Font(R.font.sen)),
+                        )
+                    )
                 }
             }
         }
     }
+}
+@RequiresApi(Build.VERSION_CODES.O)
+fun formatTimestampToHHMM(timestamp: String): String {
+    val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+    val zonedDateTime = ZonedDateTime.parse(timestamp, formatter)
+
+    // Convert to IST (Indian Standard Time) which is UTC+5:30
+    val zoneId = ZoneId.of("Asia/Kolkata")
+    val istDateTime = zonedDateTime.withZoneSameInstant(zoneId)
+
+    // Format hours and minutes
+    val hours = istDateTime.hour.toString().padStart(2, '0')
+    val minutes = istDateTime.minute.toString().padStart(2, '0')
+
+    return "$hours:$minutes"
 }
